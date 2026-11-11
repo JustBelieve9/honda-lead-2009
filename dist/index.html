@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Интерактивный гараж Honda Lead 110 2009: 3D-модель, устройство, обслуживание и проверяемые заводские источники.">
+  <title>LEAD / 09 — Твой интерактивный гараж</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23db3429'/%3E%3Ctext x='12' y='47' font-size='43' font-family='Arial' font-weight='bold' fill='white'%3EL%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/controls/OrbitControls.js":"./vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+  <a class="skip" href="#catalog">Перейти к справочнику</a>
+  <header class="topbar">
+    <a href="#" class="brand" aria-label="LEAD Garage, главная"><span class="brand-symbol">L<span>↗</span></span><span>LEAD<span class="brand-light"> / garage</span></span></a>
+    <nav aria-label="Основная навигация"><button class="nav-link active" data-nav="explore">Обзор байка</button><button class="nav-link" data-nav="catalog">Справочник</button><button class="nav-link" data-nav="maintenance">Обслуживание</button></nav>
+    <button class="source-link" id="sourcesButton">Источники <span aria-hidden="true">↗</span></button>
+  </header>
+  <main>
+    <section class="intro">
+      <div><div class="eyebrow"><span class="red-dot"></span> ТВОЙ БАЙК. В ДЕТАЛЯХ.</div><h1>Honda Lead<span class="year">2009</span><span class="title-dot">.</span></h1><p>Разберись в своём байке. От лампочки до двигателя.</p></div>
+      <div class="bike-badge"><span class="badge-icon" aria-hidden="true">110</span><div><strong>LEAD 110 · Việt Nam</strong><span>108 см³ по документу · белый</span></div><button id="identityButton" class="icon-button" aria-label="Применимость документации">i</button></div>
+    </section>
+    <section class="workspace" aria-label="Интерактивный обзор">
+      <aside class="systems"><div class="section-label">УЗЛЫ БАЙКА <span id="systemCount">00</span></div><div id="systemNav"></div><div class="aside-note"><span class="red-dot"></span><p>Выбирай узел на модели<br>или в списке слева.</p></div></aside>
+      <div class="viewer" id="viewer">
+        <div class="viewer-top"><span class="viewer-label"><span class="live-dot"></span> ИНТЕРАКТИВНАЯ 3D-МОДЕЛЬ</span><span class="view-caption" id="viewCaption">Вид в три четверти</span></div>
+        <div class="ghost-word" aria-hidden="true">LEAD</div>
+        <canvas id="bikeCanvas" tabindex="0" aria-label="3D-модель Honda Lead. Стрелки вращают, плюс и минус приближают. Узлы доступны в списке слева."></canvas>
+        <div id="hotspots" aria-label="Точки модели"></div>
+        <div id="loading" role="status"><span class="loader"></span>Собираем твой байк…</div>
+        <div class="model-tag"><span>01 / 2009</span><strong>PEARL WHITE</strong><span>Low-poly · схема устройства</span></div>
+        <div class="view-tools"><button id="rotateLeft" class="icon-button" aria-label="Повернуть влево">↶</button><button id="rotateRight" class="icon-button" aria-label="Повернуть вправо">↷</button><span></span><button id="zoomIn" class="icon-button" aria-label="Приблизить">+</button><button id="zoomOut" class="icon-button" aria-label="Отдалить">−</button><button id="resetView" class="icon-button" aria-label="Сбросить вид">⌖</button></div>
+        <div class="viewer-bottom"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 2v7"/></svg>Тяни, чтобы вращать <i>·</i> Скролл для приближения</span><button id="labelsToggle" aria-pressed="true">Метки <span class="switch on"></span></button></div>
+      </div>
+      <aside class="detail" id="detail" aria-label="Информация о выбранном узле"><div id="detailContent"></div></aside>
+    </section>
+    <div class="quick-strip"><span class="section-label">ЗАГЛЯНУТЬ ВНУТРЬ</span><button data-open="seat"><span class="line-icon" aria-hidden="true">↗</span>Открыть сиденье<span class="key">01</span></button><button data-open="glove"><span class="line-icon" aria-hidden="true">↗</span>Открыть бардачок<span class="key">02</span></button><button data-open="battery"><span class="line-icon" aria-hidden="true">↗</span>Доступ к аккумулятору<span class="key">03</span></button><button data-open="engine"><span class="line-icon" aria-hidden="true">↗</span>Доступ к мотору<span class="key">04</span></button></div>
+    <section class="library" id="catalog">
+      <div class="library-heading"><div><div class="eyebrow">МАЛЕНЬКИЕ ДЕТАЛИ. БОЛЬШАЯ РАЗНИЦА.</div><h2>Знать свой Lead.</h2></div><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><input id="searchInput" type="search" placeholder="Масло, лампы, предохранители…" aria-label="Поиск по справочнику"><kbd>/</kbd></label></div>
+      <div class="filters" id="filters" aria-label="Категории справочника"></div><div class="article-grid" id="articleGrid"></div><p class="empty" id="emptyState" hidden>Ничего не найдено. Попробуй название узла или расходника.</p>
+    </section>
+    <section class="maintenance" id="maintenance"><div class="maintenance-intro"><div class="eyebrow">БАЙК ЛЮБИТ ВНИМАНИЕ</div><h2>До следующей<br>поездки.</h2><p>Короткая проверка перед стартом.<br>Отметки сохраняются на этом устройстве.</p><button class="text-button" id="resetChecklist">Сбросить отметки ↗</button></div><div id="checklist" class="checklist"></div></section>
+    <section class="provenance"><div><span class="small-label">О ДОКУМЕНТАЦИИ</span><h3>Проверяй первоисточник.</h3></div><p>Основа — заводское руководство LEAD 110 / NHX110, 2009. Для вьетнамской версии некоторые позиции требуют сверки по маркировке. У каждой карточки есть источник и отметка применимости. 3D-модель показывает устройство схематично.</p><button class="outline-button" id="allSources">Открыть источники ↗</button></section>
+  </main>
+  <footer><a class="footer-brand" href="#">LEAD / 09</a><span>Личный гараж. Больше понимания, меньше догадок.</span><span>Неофициальный справочник · 2026</span></footer>
+  <dialog id="infoDialog" aria-labelledby="dialogTitle"><button id="closeDialog" class="dialog-close icon-button" aria-label="Закрыть">×</button><div id="dialogBody"></div></dialog>
+  <div class="toast" role="status" id="toast"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

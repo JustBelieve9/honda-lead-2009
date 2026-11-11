@@ -1,0 +1,7 @@
+research/
+preview*.jpg
+*.zip
+*.tar.gz
+*.tgz
+.sites-local/
+node_modules/
